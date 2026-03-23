@@ -55,34 +55,30 @@ os.makedirs(mats_1k_dir, exist_ok=True)
 os.makedirs(mats_4k_dir, exist_ok=True)
 os.makedirs(edgewear_dir, exist_ok=True)
 
-# --- Extract BB_Mats_1K.zip ---
-zip_1k = os.path.join(source_dir, "BB_Mats_1K.zip")
-if os.path.isfile(zip_1k):
-    print(f"Extracting BB_Mats_1K.zip -> BB Mats 1K/")
-    with zipfile.ZipFile(zip_1k, "r") as z:
-        z.extractall(mats_1k_dir)
-else:
-    print("Warning: BB_Mats_1K.zip not found, skipping.")
-
-# --- Extract BB_Mats_4K*.zip files ---
-zip_4k_files = sorted(f for f in zip_files if f.startswith("BB_Mats_4k"))
-if zip_4k_files:
-    for fname in zip_4k_files:
-        print(f"Extracting {fname} -> BB Mats 4K/")
+def extract_zips(files, dest, label):
+    if not files:
+        print(f"Warning: No {label} zip files found, skipping.")
+        return
+    for fname in sorted(files):
+        print(f"Extracting {fname} -> {label}/")
         with zipfile.ZipFile(os.path.join(source_dir, fname), "r") as z:
-            z.extractall(mats_4k_dir)
-else:
-    print("Warning: No BB_Mats_4K*.zip files found, skipping.")
+            z.extractall(dest)
 
-# --- Extract Edgewear zip files ---
+# --- Extract ---
+extract_zips(
+    [f for f in zip_files if f == "BB_Mats_1K.zip"],
+    mats_1k_dir, "BB Mats 1K"
+)
+
+extract_zips(
+    [f for f in zip_files if f.startswith("BB_Mats_4k")],
+    mats_4k_dir, "BB Mats 4K"
+)
+
 edgewear_prefixes = ("Dents", "Dust", "Edgewear_and_Particles", "Rust", "Scratches", "Smudge_and_Stains")
-edgewear_files = sorted(f for f in zip_files if any(f.startswith(p) for p in edgewear_prefixes))
-if edgewear_files:
-    for fname in edgewear_files:
-        print(f"Extracting {fname} -> Edgewear/")
-        with zipfile.ZipFile(os.path.join(source_dir, fname), "r") as z:
-            z.extractall(edgewear_dir)
-else:
-    print("Warning: No Edgewear zip files found, skipping.")
+extract_zips(
+    [f for f in zip_files if any(f.startswith(p) for p in edgewear_prefixes)],
+    edgewear_dir, "Edgewear"
+)
 
 print("\nDone!")
