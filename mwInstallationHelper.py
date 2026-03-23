@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 
 # Version
-v = "0.4.0"
+v = "0.5.0"
 
 # --- Header ---
 start_time = time.time()
@@ -53,9 +53,11 @@ else:
 mats_1k_dir = os.path.join(target_dir, "BB Mats 1K")
 mats_4k_dir = os.path.join(target_dir, "BB Mats 4K")
 edgewear_dir = os.path.join(target_dir, "Edgewear")
+hdri_dir = os.path.join(target_dir, "HDRi")
 os.makedirs(mats_1k_dir, exist_ok=True)
 os.makedirs(mats_4k_dir, exist_ok=True)
 os.makedirs(edgewear_dir, exist_ok=True)
+os.makedirs(hdri_dir, exist_ok=True)
 
 def extract_zips(files, dest, label):
     if not files:
@@ -83,6 +85,11 @@ edgewear_prefixes = ("Dents", "Dust", "Edgewear_and_Particles", "Rust", "Scratch
 extract_zips(
     [f for f in zip_files if any(f.startswith(p) for p in edgewear_prefixes)],
     edgewear_dir, "Edgewear"
+)
+
+extract_zips(
+    [f for f in zip_files if f == "HDRi.zip"],
+    hdri_dir, "HDRi"
 )
 
 print(f"\nDone! Total time: {time.time() - start_time:.1f}s")

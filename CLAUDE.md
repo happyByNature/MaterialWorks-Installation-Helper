@@ -26,6 +26,7 @@ The script (currently in early development) will:
 6. Extract `BB_Mats_1K.zip` into `BB Mats 1K/`
 7. Extract all `BB_Mats_4k*.zip` files into `BB Mats 4K/`
 8. Extract Edgewear zips (`Dents`, `Dust`, `Edgewear_and_Particles`, `Rust`, `Scratches`, `Smudge_and_Stains`) into `Edgewear/` — matched by filename prefix to handle versioning suffixes
+9. Extract `HDRi.zip` into `HDRi/`
 
 ## Input File Layout
 
