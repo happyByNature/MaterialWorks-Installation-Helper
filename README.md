@@ -13,8 +13,7 @@ This is a helper to install MaterialWorks addon of BlenderBros (www.blenderbros.
 
 ## How to use
 
-Run python script mwInstallationHelper.py and give source and destination folders as input.
-Command to run the script:
+Run python script mwInstallationHelper.py and give source and destination folders as input:
 ```bash
 python mwInstallationHelper.py <source_dir>
 ```
