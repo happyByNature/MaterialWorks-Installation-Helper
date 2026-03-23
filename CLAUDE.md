@@ -9,7 +9,7 @@ A Python CLI utility that automates installation of the MaterialWorks addon for 
 ## Running the Script
 
 ```bash
-python install.py <source_dir>
+python helper.py <source_dir>
 ```
 
 No external dependencies — uses Python standard library only.

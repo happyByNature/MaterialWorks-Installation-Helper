@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 
 # Version
-v = "0.7.0"
+v = "0.8.0"
 
 # --- Colors ---
 RESET  = "\033[0m"
@@ -28,7 +28,7 @@ print(f"{DIM}Date/Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}{RESET}")
 
 if len(sys.argv) < 2:
     print(f"{RED}Error: No source folder provided.{RESET}")
-    print(f"Usage: python install.py <source_dir>")
+    print(f"Usage: python helper.py <source_dir>")
     sys.exit(1)
 
 source_dir = os.path.abspath(sys.argv[1])
@@ -78,6 +78,12 @@ for d in [mats_1k_dir, mats_4k_dir, edgewear_dir, hdri_dir, details_dir]:
 
 processed_files = set()
 
+def progress_bar(current, total, width=40):
+    filled = int(width * current / total)
+    bar = "█" * filled + "░" * (width - filled)
+    pct = current / total * 100
+    print(f"\r  {CYAN}[{bar}]{RESET} {pct:5.1f}% ({current}/{total})", end="", flush=True)
+
 def extract_zips(files, dest, label):
     if not files:
         print(f"{YELLOW}Warning: No {label} zip files found, skipping.{RESET}")
@@ -87,7 +93,11 @@ def extract_zips(files, dest, label):
     for fname in sorted(files):
         print(f"  {DIM}Extracting{RESET} {fname} {DIM}->{RESET} {label}/")
         with zipfile.ZipFile(os.path.join(source_dir, fname), "r") as z:
-            z.extractall(dest)
+            members = z.infolist()
+            for i, member in enumerate(members, 1):
+                z.extract(member, dest)
+                progress_bar(i, len(members))
+        print()
         processed_files.add(fname)
     print(f"  {GREEN}Done in {time.time() - t:.1f}s{RESET}")
 

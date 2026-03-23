@@ -13,15 +13,15 @@ This is a helper to install MaterialWorks addon of BlenderBros (www.blenderbros.
 
 ## How to use
 
-Run python script install.py and give source folder as input:
+Run python script helper.py and give source folder as input:
 ```bash
-python install.py <source_dir>
+python helper.py <source_dir>
 ```
 
-Example, navigate to the folder where install.py is located and run the script:
+Example, navigate to the folder where helper.py is located and run the script:
 ```bash
 cd E:\GitHub\MaterialWorks-Installation-Helper
-py .\install.py "C:\Users\username\Downloads\MW_23032026_1-2e"
+py .\helper.py "C:\Users\username\Downloads\MW_23032026_1-2e"
 ```
 As a result, you will get a new folder named "MW_23032026_1-2e_Ready" in the same location as the source folder; this folder is "ready to use" in Blender. You can refence it in Blender or move to a desired location and point to it.
 
