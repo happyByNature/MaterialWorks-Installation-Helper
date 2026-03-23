@@ -22,11 +22,15 @@ The script (currently in early development) will:
 2. Validate that `<source_dir>` exists (exit with error if not)
 3. Validate that at least one `.zip` file exists in `<source_dir>` (exit with error if none)
 4. Create a target folder at `<parent_of_source_dir>/<source_dir_name>_Ready` — if it already exists, **delete all files in it**
-5. Create `BB Mats 1K`, `BB Mats 4K`, `Edgewear`, `HDRi` subfolders inside the target folder
-6. Extract `BB_Mats_1K.zip` into `BB Mats 1K/`
-7. Extract all `BB_Mats_4k*.zip` files into `BB Mats 4K/`
-8. Extract Edgewear zips (`Dents`, `Dust`, `Edgewear_and_Particles`, `Rust`, `Scratches`, `Smudge_and_Stains`) into `Edgewear/` — matched by filename prefix to handle versioning suffixes
-9. Extract `HDRi.zip` into `HDRi/`
+5. Inside the target folder, create a `Mats` and `Details` subfolders 
+6. Create `BB Mats 1K`, `BB Mats 4K`, `Edgewear`, `HDRi` subfolders inside `Mats`
+7. Extract `BB_Mats_1K.zip` into `BB Mats 1K/`
+8. Extract all `BB_Mats_4k*.zip` files into `BB Mats 4K/`
+9. Extract Edgewear zips (`Dents`, `Dust`, `Edgewear_and_Particles`, `Rust`, `Scratches`, `Smudge_and_Stains`) into `Edgewear/` — matched by filename prefix to handle versioning suffixes
+10. Extract `HDRi.zip` into `HDRi/`
+11. Extract `Details.zip` into `Details/`
+12. Extract all `Trims*.zip` files into `Details/Trims/`
+13. Extract all `Decals*.zip` files into `Details/Decals/`
 
 ## Input File Layout
 

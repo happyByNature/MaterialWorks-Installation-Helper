@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 
 # Version
-v = "0.6.0"
+v = "0.7.0"
 
 # --- Colors ---
 RESET  = "\033[0m"
@@ -63,14 +63,18 @@ else:
     print(f"{GREEN}Created target folder: {target_dir}{RESET}")
 
 # --- Create subfolders ---
-mats_1k_dir = os.path.join(target_dir, "BB Mats 1K")
-mats_4k_dir = os.path.join(target_dir, "BB Mats 4K")
-edgewear_dir = os.path.join(target_dir, "Edgewear")
-hdri_dir = os.path.join(target_dir, "HDRi")
-os.makedirs(mats_1k_dir, exist_ok=True)
-os.makedirs(mats_4k_dir, exist_ok=True)
-os.makedirs(edgewear_dir, exist_ok=True)
-os.makedirs(hdri_dir, exist_ok=True)
+mats_dir    = os.path.join(target_dir, "Mats")
+details_dir = os.path.join(target_dir, "Details")
+
+mats_1k_dir  = os.path.join(mats_dir, "BB Mats 1K")
+mats_4k_dir  = os.path.join(mats_dir, "BB Mats 4K")
+edgewear_dir = os.path.join(mats_dir, "Edgewear")
+hdri_dir     = os.path.join(mats_dir, "HDRi")
+trims_dir    = os.path.join(details_dir, "Trims")
+decals_dir   = os.path.join(details_dir, "Decals")
+
+for d in [mats_1k_dir, mats_4k_dir, edgewear_dir, hdri_dir, details_dir]:
+    os.makedirs(d, exist_ok=True)
 
 processed_files = set()
 
@@ -107,6 +111,21 @@ extract_zips(
 extract_zips(
     [f for f in zip_files if f == "HDRi.zip"],
     hdri_dir, "HDRi"
+)
+
+extract_zips(
+    [f for f in zip_files if f == "Details.zip"],
+    details_dir, "Details"
+)
+
+extract_zips(
+    [f for f in zip_files if f.startswith("Trims")],
+    trims_dir, "Trims"
+)
+
+extract_zips(
+    [f for f in zip_files if f.startswith("Decals")],
+    decals_dir, "Decals"
 )
 
 unprocessed = sorted(set(zip_files) - processed_files)
