@@ -30,10 +30,17 @@ As a result, you will get a new folder named "MW_23032026_1-2e_Ready" in the sam
 
 1. Validates that the source folder exists and contains at least one zip file.
 2. Creates a `<source_folder>_Ready` target folder next to the source folder (clears it if it already exists).
-3. Extracts zip files into the following subfolders:
-   - **BB Mats 1K** — from `BB_Mats_1K.zip`
-   - **BB Mats 4K** — from all `BB_Mats_4k*.zip` files
-   - **Edgewear** — from `Dents`, `Dust`, `Edgewear_and_Particles`, `Rust`, `Scratches`, `Smudge_and_Stains` zips
-   - **HDRi** — from `HDRi.zip`
+3. Extracts zip files into the following structure:
+   ```
+   <source_folder>_Ready/
+   ├── Mats/
+   │   ├── BB Mats 1K/     ← BB_Mats_1K.zip
+   │   ├── BB Mats 4K/     ← BB_Mats_4k*.zip
+   │   ├── Edgewear/       ← Dents, Dust, Edgewear_and_Particles, Rust, Scratches, Smudge_and_Stains zips
+   │   └── HDRi/           ← HDRi.zip
+   └── Details/            ← Details.zip
+       ├── Trims/          ← Trims*.zip
+       └── Decals/         ← Decals*.zip
+   ```
 4. Warns about any zip files in the source folder that were not processed.
 5. Prints per-category and total execution time.
