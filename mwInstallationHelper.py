@@ -6,30 +6,43 @@ import time
 from datetime import datetime
 
 # Version
-v = "0.5.0"
+v = "0.6.0"
+
+# --- Colors ---
+RESET  = "\033[0m"
+BOLD   = "\033[1m"
+CYAN   = "\033[96m"
+GREEN  = "\033[92m"
+YELLOW = "\033[93m"
+RED    = "\033[91m"
+DIM    = "\033[2m"
+
+# Enable ANSI on Windows
+if sys.platform == "win32":
+    os.system("")
 
 # --- Header ---
 start_time = time.time()
-print(f"\n*** MaterialWorks Installation Helper, Version: {v} ***")
-print(f"Date/Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+print(f"\n{BOLD}{CYAN}*** MaterialWorks Installation Helper, Version: {v} ***{RESET}")
+print(f"{DIM}Date/Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}{RESET}")
 
 if len(sys.argv) < 2:
-    print("Error: No source folder provided.")
-    print("Usage: python mwInstallationHelper.py <source_dir>")
+    print(f"{RED}Error: No source folder provided.{RESET}")
+    print(f"Usage: python mwInstallationHelper.py <source_dir>")
     sys.exit(1)
 
 source_dir = os.path.abspath(sys.argv[1])
-print(f"Source folder: {source_dir}\n")
+print(f"Source folder: {CYAN}{source_dir}{RESET}\n")
 
 # --- Validate source folder ---
 if not os.path.isdir(source_dir):
-    print(f"Error: Source folder '{source_dir}' does not exist.")
+    print(f"{RED}Error: Source folder '{source_dir}' does not exist.{RESET}")
     sys.exit(1)
 
 # --- Validate zip files exist ---
 zip_files = [f for f in os.listdir(source_dir) if f.lower().endswith(".zip")]
 if not zip_files:
-    print(f"Error: No zip files found in '{source_dir}'.")
+    print(f"{RED}Error: No zip files found in '{source_dir}'.{RESET}")
     sys.exit(1)
 
 # --- Create target folder ---
@@ -38,7 +51,7 @@ source_name = os.path.basename(source_dir)
 target_dir = os.path.join(parent_dir, f"{source_name}_Ready")
 
 if os.path.isdir(target_dir):
-    print(f"Target folder already exists. Clearing: {target_dir}")
+    print(f"{YELLOW}Target folder already exists. Clearing: {target_dir}{RESET}")
     for item in os.listdir(target_dir):
         item_path = os.path.join(target_dir, item)
         if os.path.isfile(item_path) or os.path.islink(item_path):
@@ -47,7 +60,7 @@ if os.path.isdir(target_dir):
             shutil.rmtree(item_path)
 else:
     os.makedirs(target_dir)
-    print(f"Created target folder: {target_dir}")
+    print(f"{GREEN}Created target folder: {target_dir}{RESET}")
 
 # --- Create subfolders ---
 mats_1k_dir = os.path.join(target_dir, "BB Mats 1K")
@@ -63,15 +76,16 @@ processed_files = set()
 
 def extract_zips(files, dest, label):
     if not files:
-        print(f"Warning: No {label} zip files found, skipping.")
+        print(f"{YELLOW}Warning: No {label} zip files found, skipping.{RESET}")
         return
+    print(f"\n{BOLD}[ {label} ]{RESET}")
     t = time.time()
     for fname in sorted(files):
-        print(f"Extracting {fname} -> {label}/")
+        print(f"  {DIM}Extracting{RESET} {fname} {DIM}->{RESET} {label}/")
         with zipfile.ZipFile(os.path.join(source_dir, fname), "r") as z:
             z.extractall(dest)
         processed_files.add(fname)
-    print(f"  [{label} done in {time.time() - t:.1f}s]")
+    print(f"  {GREEN}Done in {time.time() - t:.1f}s{RESET}")
 
 # --- Extract ---
 extract_zips(
@@ -97,8 +111,8 @@ extract_zips(
 
 unprocessed = sorted(set(zip_files) - processed_files)
 if unprocessed:
-    print("\nWarning: The following zip files were not processed:")
+    print(f"\n{YELLOW}{BOLD}Warning: The following zip files were not processed:{RESET}")
     for f in unprocessed:
-        print(f"  - {f}")
+        print(f"  {YELLOW}- {f}{RESET}")
 
-print(f"\nDone! Total time: {time.time() - start_time:.1f}s")
+print(f"\n{BOLD}{GREEN}Done! Total time: {time.time() - start_time:.1f}s{RESET}")
