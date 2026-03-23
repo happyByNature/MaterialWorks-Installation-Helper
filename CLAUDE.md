@@ -22,7 +22,7 @@ The script (currently in early development) will:
 2. Validate that `<source_dir>` exists (exit with error if not)
 3. Validate that at least one `.zip` file exists in `<source_dir>` (exit with error if none)
 4. Create a target folder at `<parent_of_source_dir>/<source_dir_name>_Ready` — if it already exists, **delete all files in it**
-5. Create `BB Mats 1K`, `BB Mats 4K`, `Edgewear` subfolders inside the target folder
+5. Create `BB Mats 1K`, `BB Mats 4K`, `Edgewear`, `HDRi` subfolders inside the target folder
 6. Extract `BB_Mats_1K.zip` into `BB Mats 1K/`
 7. Extract all `BB_Mats_4k*.zip` files into `BB Mats 4K/`
 8. Extract Edgewear zips (`Dents`, `Dust`, `Edgewear_and_Particles`, `Rust`, `Scratches`, `Smudge_and_Stains`) into `Edgewear/` — matched by filename prefix to handle versioning suffixes

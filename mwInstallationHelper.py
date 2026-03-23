@@ -2,12 +2,14 @@ import sys
 import os
 import shutil
 import zipfile
+import time
 from datetime import datetime
 
 # Version
-v = "0.3.0"
+v = "0.4.0"
 
 # --- Header ---
+start_time = time.time()
 print(f"\n*** MaterialWorks Installation Helper, Version: {v} ***")
 print(f"Date/Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
@@ -59,10 +61,12 @@ def extract_zips(files, dest, label):
     if not files:
         print(f"Warning: No {label} zip files found, skipping.")
         return
+    t = time.time()
     for fname in sorted(files):
         print(f"Extracting {fname} -> {label}/")
         with zipfile.ZipFile(os.path.join(source_dir, fname), "r") as z:
             z.extractall(dest)
+    print(f"  [{label} done in {time.time() - t:.1f}s]")
 
 # --- Extract ---
 extract_zips(
@@ -81,4 +85,4 @@ extract_zips(
     edgewear_dir, "Edgewear"
 )
 
-print("\nDone!")
+print(f"\nDone! Total time: {time.time() - start_time:.1f}s")
