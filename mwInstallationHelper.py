@@ -59,6 +59,8 @@ os.makedirs(mats_4k_dir, exist_ok=True)
 os.makedirs(edgewear_dir, exist_ok=True)
 os.makedirs(hdri_dir, exist_ok=True)
 
+processed_files = set()
+
 def extract_zips(files, dest, label):
     if not files:
         print(f"Warning: No {label} zip files found, skipping.")
@@ -68,6 +70,7 @@ def extract_zips(files, dest, label):
         print(f"Extracting {fname} -> {label}/")
         with zipfile.ZipFile(os.path.join(source_dir, fname), "r") as z:
             z.extractall(dest)
+        processed_files.add(fname)
     print(f"  [{label} done in {time.time() - t:.1f}s]")
 
 # --- Extract ---
@@ -91,5 +94,11 @@ extract_zips(
     [f for f in zip_files if f == "HDRi.zip"],
     hdri_dir, "HDRi"
 )
+
+unprocessed = sorted(set(zip_files) - processed_files)
+if unprocessed:
+    print("\nWarning: The following zip files were not processed:")
+    for f in unprocessed:
+        print(f"  - {f}")
 
 print(f"\nDone! Total time: {time.time() - start_time:.1f}s")
