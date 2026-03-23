@@ -45,5 +45,4 @@ As a result, you will get a new folder named "MW_23032026_1-2e_Ready" in the sam
 5. Prints per-category and total execution time.
 
 ## Screenshot
-The script will print the following message:
 ![img.png](img.png)
