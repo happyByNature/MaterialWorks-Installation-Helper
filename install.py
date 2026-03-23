@@ -28,7 +28,7 @@ print(f"{DIM}Date/Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}{RESET}")
 
 if len(sys.argv) < 2:
     print(f"{RED}Error: No source folder provided.{RESET}")
-    print(f"Usage: python mwInstallationHelper.py <source_dir>")
+    print(f"Usage: python install.py <source_dir>")
     sys.exit(1)
 
 source_dir = os.path.abspath(sys.argv[1])
