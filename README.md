@@ -6,8 +6,9 @@ This is a helper to install MaterialWorks addon of BlenderBros (www.blenderbros.
 
 **Assuming you know what GitHub and "git clone" are and how to run python scripts:**
 
-1. Download all files from MW website and put them in the **same folder** (like Downloads/MW_23032026_1-2e).
-2. Except for the main addon file like (MaterialWorks-1.2e.zip), put it in a separate folder.
+1. Clone this repository to your local machine.
+2. Download all files from MW website and put them in the **same folder** (like Downloads/MW_23032026_1-2e).
+3. Except for the main addon file like (MaterialWorks-1.2e.zip), put it in a separate folder.
 
 ***Notice, they have versions increment like a, b, c, etc., so download the farthest version from the beginning of the Alphabets (means "c" version is more recent than "a" version).***
 
@@ -23,7 +24,7 @@ Example, navigate to the folder where helper.py is located and run the script:
 cd E:\GitHub\MaterialWorks-Installation-Helper
 py .\helper.py "C:\Users\username\Downloads\MW_23032026_1-2e"
 ```
-As a result, you will get a new folder named "MW_23032026_1-2e_Ready" in the same location as the source folder; this folder is "ready to use" in Blender. You can refence it in Blender or move to a desired location and point to it.
+As a result, you will get a new folder named "MW_23032026_1-2e_Ready" in the same location as the source folder; this folder is "ready to use" in Blender. You can reference it in Blender or move to a desired location and point to it.
 
 ## What the script does
 
