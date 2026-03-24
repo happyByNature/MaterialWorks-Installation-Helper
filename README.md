@@ -19,7 +19,7 @@ Run python script helper.py and give the source folder as input:
 python helper.py <source_dir>
 ```
 
-Example, navigate to the folder where helper.py is located and run the script:
+Example, navigate to the folder where helper.py is located and run the script specifying your source folder:
 ```bash
 cd E:\GitHub\MaterialWorks-Installation-Helper
 py .\helper.py "C:\Users\username\Downloads\MW_23032026_1-2e"
