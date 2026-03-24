@@ -14,7 +14,7 @@ This is a helper to install MaterialWorks addon of BlenderBros (www.blenderbros.
 
 ## How to use
 
-Run python script helper.py and give the source folder as input:
+Run python script helper.py and give the source folder as input (step 2 from "Prerequisites"):
 ```bash
 python helper.py <source_dir>
 ```
